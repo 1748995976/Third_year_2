@@ -1,0 +1,45 @@
+uname -r
+sudo mount -t vboxsf Public_ubuntu Public_windows
+
+apt search linux-source
+sudo apt install linux-source-4.10.0
+
+sudo tar -jx -f linux-source-4.10.0.tar.bz2 -C /usr/src
+
+sudo apt-get --purge remove linux-source-4.10.0
+sudo rm -rf linux-source-4.10.0
+
+
+sudo vim include/linux/syscalls.h
+sudo vim kernel/sys.c
+sudo vim arch/x86/entry/syscalls/syscall_64.tbl
+
+
+sudo make mrproper
+sudo make clean
+sudo apt-get install libssl-dev
+sudo make oldconfig
+sudo make -j4
+sudo make modules_install
+sudo make install
+
+
+
+sudo rm -rf vmlinuz-4.10.17
+sudo rm -rf vmlinuz-4.10.17.old
+sudo rm -rf initrd.img-4.10.17
+sudo rm -rf System.map-4.10.17
+sudo rm -rf System.map-4.10.17.old
+sudo rm -rf config-4.10.17
+sudo rm -rf config-4.10.17.old
+sudo rm -rf /lib/modules​
+sudo update-grub
+
+sudo make
+sudo insmod Driver.ko
+sudo mknod /dev/sky_driver c 245 0
+
+删除模块
+命令：rmmod   sky_driver（生成的文件名 ko）
+删除新增的字符设备文件
+命令：rm   /dev/sky_driver
