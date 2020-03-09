@@ -1,0 +1,1 @@
+cmd_/home/wzc1748995976/Public_windows/OperatingSystem/lab3/built-in.o :=  rm -f /home/wzc1748995976/Public_windows/OperatingSystem/lab3/built-in.o; ar rcsD /home/wzc1748995976/Public_windows/OperatingSystem/lab3/built-in.o

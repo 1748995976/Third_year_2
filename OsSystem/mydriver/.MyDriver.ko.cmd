@@ -1,0 +1,1 @@
+cmd_/home/wzc1748995976/Public_windows/OperatingSystem/mydriver/MyDriver.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/wzc1748995976/Public_windows/OperatingSystem/mydriver/MyDriver.ko /home/wzc1748995976/Public_windows/OperatingSystem/mydriver/MyDriver.o /home/wzc1748995976/Public_windows/OperatingSystem/mydriver/MyDriver.mod.o ;  true
