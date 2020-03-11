@@ -14,6 +14,7 @@
 #include <mutex>
 #include <time.h>
 #include <QMessageBox>
+#include <unistd.h>
 
 using std::cout;
 using std::endl;
@@ -117,7 +118,7 @@ void MainWindow::on_pushButton_clicked()
             ui->plainTextEdit_2->setPlainText("Not found!");
             return;
         }
-        QList<QListWidgetItem *> list = ui->listWidget->findItems(allname,Qt::MatchExactly);//避免特殊情况readdir读取不到某些隐藏目录
+        QList<QListWidgetItem *> list = ui->listWidget->findItems(allname,Qt::MatchContains);//避免特殊情况readdir读取不到某些隐藏目录
         if(list.length() == 0){
             ui->plainTextEdit->setPlainText("Not found!");
             ui->plainTextEdit_2->setPlainText("Not found!");
@@ -160,7 +161,7 @@ void MainWindow::on_pushButton_2_clicked()
         ui->plainTextEdit_2->setPlainText("Not find process!");
         return;
     }
-    QList<QListWidgetItem *> list = ui->listWidget->findItems(QString::fromStdString(tmp),Qt::MatchExactly);
+    QList<QListWidgetItem *> list = ui->listWidget->findItems(QString::fromStdString(tmp),Qt::MatchContains);
     if(list.length() == 0){//避免特殊情况readdir读取不到某些隐藏目录
         ui->plainTextEdit->setPlainText("Not found!");
         ui->plainTextEdit_2->setPlainText("Not found!");
@@ -173,6 +174,7 @@ void MainWindow::on_pushButton_2_clicked()
         if(!kill(pid.toInt(),SIGTERM)){
             ui->plainTextEdit->setPlainText("Kill success!");
             ui->plainTextEdit_2->setPlainText("Kill success!");
+            sleep(1);
             ui->listWidget->clear();
             packfuneg.read_processinfo();
         }
@@ -188,13 +190,15 @@ void MainWindow::on_pushButton_4_clicked()//启动一个新进程
     QProcess *pro = new QProcess;
     QString tmp = ui->lineEdit->text();
     pro->start(tmp);
+    ui->listWidget->clear();
+    packfuneg.read_processinfo();
 }
 
 void MainWindow::add_cpupoint(float usage)//更新CPU使用率列表
 {
     int i;
     int size =  yList_cpu.size();
-    if(size > 120)
+    if(size >= 120)
         yList_cpu.pop_front();
     if(size == 0)
     {
@@ -238,7 +242,7 @@ void MainWindow::add_mempoint(float usage)//更新MEM使用率列表
 {
     int i;
     int size =  yList_mem.size();
-    if(size > 120)
+    if(size >= 120)
         yList_mem.pop_front();
     if(size == 0)
     {

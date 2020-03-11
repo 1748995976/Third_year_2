@@ -97,7 +97,7 @@ string packfun::read_uptime(void)
     }else{
         int count = 0;
         string line;
-        while (infile >> count) {
+        if (infile >> count) {
             time_t tmp_time;
             struct tm *tmp;
             //获取当前时间
@@ -306,8 +306,9 @@ string packfun::read_assignpid(string number)
         else
             process_status = "unknown";
         sprintf(memo_size, "%.2fM", (float)(page * getpagesize() / 1024.0 / 1024.0));
-        sprintf(allinfo,"%-6s%-20s%-9s%-13s%-7d%-8s",pid,process_name,ppid,process_status.c_str(),priority,memo_size);
+        sprintf(allinfo,"%-6s%-20s%-9s%-13s%-7d",pid,process_name,ppid,process_status.c_str(),priority);
         line = (string)allinfo;
+        cout << line << endl;
         return line;
     }
 }
