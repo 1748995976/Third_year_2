@@ -955,7 +955,6 @@ void semantic_Analysis(struct ASTNode *T)
         case NOT:
         case UMINUS:
         case FUNC_CALL:
-            //printf("/////////");
             Exp(T); //处理基本表达式
             break;
         }
@@ -969,13 +968,12 @@ void semantic_Analysis0(struct ASTNode *T)
     symbolTable.symbols[0].paramnum = 0; //read的形参个数
     fillSymbolTable("write", "", 0, INT, 'F', 4, 0);
     symbolTable.symbols[2].paramnum = 1;
-	//fillSymbolTable("x", "", 1, INT, 'P', 12, 0);
     symbol_scope_TX.TX[0] = 0; //外部变量在符号表中的起始序号为0
     symbol_scope_TX.top = 1;
     T->offset = 0; //外部变量在数据区的偏移量
     semantic_Analysis(T);
-	// prnIR(T->code);
-    // objectCode(T->code);
+	prnIR(T->code);
+    objectCode(T->code);
 }
 
 //输出中间代码
@@ -1012,7 +1010,6 @@ void prnIR(struct codenode *head)
             break;
         case PLUSONE_L:
         case MINUSONE_L:
-           // printf("*****");
             printf("  %s := %s\n", resultstr,opnstr1);
             printf("  %s := %s %c %c\n", opnstr1, opnstr1,
                    h->op == PLUSONE_L ? '+' : h->op == MINUSONE_L ? '-'  : '\\', '1'); 
@@ -1020,7 +1017,6 @@ void prnIR(struct codenode *head)
             break;
         case PLUSONE_R:
         case MINUSONE_R:
-           // printf("*****");
             printf("  %s := %s %c %c\n", resultstr, opnstr1,
                    h->op == PLUSONE_R ? '+' : h->op == MINUSONE_R ? '-'  : '\\', '1'); 
             printf("  %s := %s %c %c\n", opnstr1, opnstr1,

@@ -1606,7 +1606,7 @@ yyreduce:
 #line 51 "parser.y"
     { 
         display((yyvsp[(1) - (1)].ptr),0);  
-        // semantic_Analysis0($1);
+        semantic_Analysis0((yyvsp[(1) - (1)].ptr));
         ;}
     break;
 
@@ -2307,4 +2307,3 @@ void yyerror(const char* fmt, ...)
     vfprintf(stderr, fmt, ap);
     fprintf(stderr, ".\n");
 }
-

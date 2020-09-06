@@ -3,6 +3,10 @@ _Prompt: .asciiz "Enter an integer:  "
 _ret: .asciiz "\n"
 .globl main
 .text
+main_0:
+ jal main
+ li $v0,10
+ syscall
 read:
   li $v0,4
   la $a0,_Prompt

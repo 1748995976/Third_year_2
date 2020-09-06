@@ -42,7 +42,6 @@ void objectCode(struct codenode *head)
             case MINUS:
             case STAR:
             case DIV:
-                       //fprintf(fp, "llllllllllll\n");
                        fprintf(fp, "  lw $t1, %d($sp)\n", h->opn1.offset);
                        fprintf(fp, "  lw $t2, %d($sp)\n", h->opn2.offset);
                        if (h->op==PLUS)       fprintf(fp, "  add $t3,$t1,$t2\n");
@@ -56,9 +55,7 @@ void objectCode(struct codenode *head)
             
             case PLUSONE_L:
             case MINUSONE_L:
-                       //fprintf(fp, "**********\n");
                        fprintf(fp, "  lw $t1, %d($sp)\n", h->opn1.offset);
-                       //fprintf(fp, "  lw $t2, %d($sp)\n", h->opn2.offset);
                        if (h->op==PLUSONE_L)       {fprintf(fp, "  move $t3, $t1\n");
                                                  fprintf(fp, "  addi $t1, $t1, 1\n");
                                                 }
@@ -70,9 +67,7 @@ void objectCode(struct codenode *head)
                         break;
             case PLUSONE_R:
             case MINUSONE_R:
-                       //fprintf(fp, "**********\n");
                        fprintf(fp, "  lw $t1, %d($sp)\n", h->opn1.offset);
-                       //fprintf(fp, "  lw $t2, %d($sp)\n", h->opn2.offset);
                         if (h->op==PLUSONE_R)   {
                                                 fprintf(fp, "  add $t3,$t1,1\n");
                                                 fprintf(fp, "  addi $t1, $t1, 1\n");

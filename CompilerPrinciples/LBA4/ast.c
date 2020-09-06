@@ -156,11 +156,8 @@ void display(struct ASTNode *T,int indent)  {//对抽象语法树的先根遍历
     case DMIN:
 	case DIV:
                     printf("%*c%s\n",indent,' ',T->type_id);
-                    //printf("*******************0\n");
                     display(T->ptr[0],indent+3);
-                    //printf("*********************1\n");
                     display(T->ptr[1],indent+3);
-                    //printf("****************end\n");
                     break;
 	case NOT:
 	case UMINUS:    printf("%*c%s\n",indent,' ',T->type_id);
@@ -177,8 +174,6 @@ void display(struct ASTNode *T,int indent)  {//对抽象语法树的先根遍历
                         display(T0,indent+3);
                         T=T->ptr[1];
                         }
-//                    printf("%*c第%d个实际参数表达式：\n",indent,' ',i);
-  //                  display(T,indent+3);
                     printf("\n");
                     break;
     case ARRAY_INDEX:   printf("%*cARRAY_INDEX：%d \n",indent,' ',T->type_int);

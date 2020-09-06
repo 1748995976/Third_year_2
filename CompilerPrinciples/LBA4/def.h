@@ -4,7 +4,7 @@
 #include "stdarg.h"
 #include "parser.tab.h"
 
-enum node_kind  { 
+enum node_kind  {
     EXT_DEF_LIST,EXT_VAR_DEF,FUNC_DEF,FUNC_DEC,EXT_DEC_LIST,
     PARAM_LIST,PARAM_DEC, VAR_DEF,DEC_LIST,DEF_LIST,COMP_STM,
     STM_LIST,EXP_STMT,IF_THEN,IF_THEN_ELSE, FUNC_CALL,ARGS, 
